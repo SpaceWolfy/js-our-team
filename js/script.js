@@ -1,20 +1,19 @@
-function createMember() {
-  const lastMember = team.pop();
-  const teamCard = `
+function createMember(MemberImage, MemberName, MemberRole) {
+  let teamCard = `
       <div class="team-card">
         <div class="card-image">
-          <img src="${lastMember.image}" />
+          <img src="img/${MemberImage.image}" />
         </div>
         <div class="card-text">
-          <h3>${lastMember.name}</h3>
-          <p>${lastMember.role}</p>
+          <h3>${MemberName.name}</h3>
+          <p>${MemberRole.role}</p>
         </div>
       </div>
       `;
-
   document.querySelector(".team-container").innerHTML += teamCard;
 }
 
+/* Array di oggetti: */
 const team = [
   {
     name: "Wayne Barnett",
@@ -49,25 +48,12 @@ const team = [
 ];
 
 for (let i = 1; i < team.length; i++) {
-  const teamCard = `
-    <div class="team-card">
-      <div class="card-image">
-        <img src="img/${team[i].image}" />
-      </div>
-      <div class="card-text">
-        <h3>${team[i].name}</h3>
-        <p>${team[i].role}</p>
-      </div>
-    </div>
-    `;
-
-  document.querySelector(".team-container").innerHTML += teamCard;
+  createMember(team[i], team[i], team[i]);
 }
-
 /* -------------------------------------------------------------------- */
 
 /* Bonus */
-/* Aggiungere immagini da internet */
+/* Aggiungere immagini dal folder img */
 let addMember = document.getElementById("addMemberButton");
 addMember.addEventListener("click", function () {
   let valName = document.getElementById("name").value;
@@ -78,7 +64,8 @@ addMember.addEventListener("click", function () {
     role: valRole,
     image: valImage,
   });
-  createMember();
+  const lastMember = team.pop();
+  createMember(lastMember, lastMember, lastMember);
 
   document.getElementById("name").value = "";
   document.getElementById("role").value = "";
